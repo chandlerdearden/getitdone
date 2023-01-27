@@ -6,7 +6,6 @@ import AuthContext from '../../store/authContext';
 
 const Login = () => {
   const authCtx = useContext(AuthContext)
-  const baseUrl = "http://localhost:4056"
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -17,7 +16,7 @@ const Login = () => {
       username,
       password,
     }
-    axios.post(`${baseUrl}/login`, user)
+    axios.post(`/login`, user)
     .then(({data}) => {
       authCtx.login(data.token, data.exp, data.userId)      
     }

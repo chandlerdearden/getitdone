@@ -15,8 +15,8 @@ const localizer = momentLocalizer(moment);
 const myEventsList = [
   {
     task_id: 1,
-    start: new Date(),
-    end: new Date(),
+    start: new Date("2023-01-26T21:51:00.000Z") ,
+    end: new Date("2023-01-26T21:51:00.000Z"),
     title: "special event",
     colorEvento: "red",
     color: "white",
@@ -34,8 +34,28 @@ const Dashboard = () => {
   
   useEffect(() => {
   const user = localStorage.getItem('userId')
-  console.log(user)
+  axios.get(`/tasks/${user}`)
+  .then(({data}) => {
+    console.log(data)
+const mappedTasks = data.map(task => {
+  let {task_id, start, end, title, desc, colorEvento, userId} = task
+  start = new Date(start)
+  end = new Date(end)
+  return {
+    start,
+    end,
+    title,
+    task_id,
+    desc,
+    colorEvento,
+    userId
+  }
+})
+setTasks(mappedTasks)
 }
+  )
+  // console.log(user)
+}, [addTaskModal]
 )
 
   const eventModalHandler = (task) => {
@@ -45,18 +65,17 @@ const Dashboard = () => {
 
   const handleOnSelectSlot = (slotInfo) => {
     setAddTaskModal(true)
-    const {start, end} = slotInfo
-    console.log(slotInfo)
   }
 
   return (
     <div className="d-flex">
         <Calendar
           selectable
+          onSelectEvent={(task) => eventModalHandler(task)}
           onSelectSlot={handleOnSelectSlot}
-          onDoubleClickEvent={(task) => eventModalHandler(task)}
+          // onDoubleClickEvent={(task) => eventModalHandler(task)}
           localizer={localizer}
-          events={myEventsList}
+          events={tasks}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 800, margin: 30 }}

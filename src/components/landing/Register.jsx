@@ -15,7 +15,6 @@ const Register = () => {
 
 
   const submitHandler = (e) => {
-    const baseUrl = "http://localhost:4056"
     e.preventDefault();
     if(username && password) {
         const registerUser = {
@@ -27,7 +26,7 @@ const Register = () => {
           color: "red"
         };
         console.log(registerUser);
-        axios.post(`${baseUrl}/register`, registerUser)
+        axios.post(`/register`, registerUser)
         .then(({data}) => {
             authCtx.login(data.token, data.exp, data.userId)
         })

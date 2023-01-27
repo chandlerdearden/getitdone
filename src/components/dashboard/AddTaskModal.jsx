@@ -1,23 +1,26 @@
-import React from "react";
-import ReactDom from "react-dom";
 import { Modal, Button } from "react-bootstrap";
+import React from 'react'
+import { useState } from "react";
+import './popper.css'
+import ReactDom from "react-dom";
+import AddTaskForm from "./forms/AddTaskForm";
 
-const AddTaskModal = ({ show, setShow }) => {
-  return (
-    ReactDom.createPortal(
-      <div>
-        <Modal show={show}>
-          <Modal.Header>This is where the headers goes</Modal.Header>
-          <Modal.Body>I can put some stuff here</Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => setShow(false)}>Close</Button>
-            <Button>add Task</Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    ),
-    document.getElementById("task-modal")
-  );
-};
+const AddTaskModal = ({setShow, show}) => {
 
-export default AddTaskModal;
+  return ReactDom.createPortal(
+    <div id="modal_wrapper">
+    <Modal id="modal_container" show={show}>
+      <Modal.Header></Modal.Header>
+      <Modal.Body>
+        <AddTaskForm setShow={setShow}/>  
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={() => setShow(false)}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+    </div>,
+    document.getElementById("addtask-modal")
+  )
+}
+
+export default AddTaskModal

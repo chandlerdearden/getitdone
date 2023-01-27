@@ -9,9 +9,10 @@ module.exports ={
             allowNull: false,
             primaryKey: true
         },
-        name: DataTypes.STRING,
+        title: DataTypes.STRING,
         desc: DataTypes.TEXT,
-        completed: DataTypes.BOOLEAN,
-        Date: DataTypes.DATE
+        start: DataTypes.DATE,
+        end: DataTypes.DATE,
+        colorEvento: DataTypes.STRING,
     })
 }
