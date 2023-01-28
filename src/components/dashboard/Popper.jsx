@@ -1,6 +1,5 @@
 import { Modal, Button } from "react-bootstrap";
 import React from 'react'
-import { useState } from "react";
 import './popper.css'
 import ReactDom from "react-dom";
 
@@ -9,7 +8,7 @@ const Popper = ({task, show}) => {
   return ReactDom.createPortal(
     <div id="modal_wrapper">
     <Modal id="modal_container" show={show}>
-      <Modal.Header>{task.title}{task.task_id}</Modal.Header>
+      <Modal.Header>{task.title}{task.id}</Modal.Header>
       <Modal.Body>{task.desc}</Modal.Body>
       <Modal.Footer>
         <Button onClick={() => show(false)}>Close</Button>

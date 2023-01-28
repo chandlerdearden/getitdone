@@ -1,7 +1,6 @@
 import React from "react";
-import { Form, FormControl, Button, InputGroup } from "react-bootstrap";
+import { Form, ButtonGroup, Button} from "react-bootstrap";
 import { useState } from "react";
-import e from "cors";
 import axios from "axios";
 const AddTaskForm = ({setShow}) => {
   const [title, setTitle] = useState("");
@@ -9,26 +8,49 @@ const AddTaskForm = ({setShow}) => {
   const [start, setStart] = useState(Date);
   const [end, setEnd] = useState(Date);
   const [color, setColor] = useState('');
+  const [taskOrProject, setTaskOrProject] = useState('Project')
 
   const submitHandler = (e) => {
+    let user = localStorage.getItem('userId')
     e.preventDefault()
-    let newTask = {
-        title,
+    if(taskOrProject === 'Task'){
+      let newTask = {
+          title,
+          desc,
+          start,
+          end,
+          colorEvento: color,
+          user_id: user
+      }
+      axios.post('/tasks', newTask)
+      .then()
+      console.log(newTask)
+      setShow(false)
+    }
+    if(taskOrProject === 'Project'){
+      let newProject = {
+        title: "Project: " + title,
         desc,
         start,
         end,
         colorEvento: color,
-        user_id: localStorage.getItem('userId')
+        user_id: user
+      }
+      axios.post('/projects', newProject)
+      .then(console.log('added Project'))
+      console.log(newProject)
+      setShow(false)
     }
-    axios.post('/tasks', newTask)
-    .then()
-    console.log(newTask)
-    setShow(false)
-  }
+
+    }
 
   return (
     <div>
-      <h1>Add New Task</h1>
+    <ButtonGroup aria-label="Basic example">
+      <Button onClick={() => setTaskOrProject('Project')} varient="secondary">Project</Button>
+      <Button onClick={() => setTaskOrProject('Task')} varient='secondary'>Task</Button>
+    </ButtonGroup>
+      <h1>Add {taskOrProject}</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group onChange={(e) => setTitle(e.target.value)} controlId="title">
           <Form.Label>Title</Form.Label>

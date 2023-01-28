@@ -21,7 +21,7 @@ app.use(cors());
 // controller functions //
 const { register, login } = require('./controllers/authController')
 const { newTask, getTask } = require('./controllers/tasksController')
-
+const { newProject, getProjects} = require('./controllers/projectsController')
 
 Users.hasMany(Projects)
 Users.hasMany(Tasks)
@@ -40,6 +40,10 @@ app.post('/login', login)
 
 app.post('/tasks', newTask)
 app.get('/tasks/:userId', getTask)
+
+app.post('/projects', newProject)
+app.get('/projects/:userId', getProjects)
+
 
 sequelize
   .sync()

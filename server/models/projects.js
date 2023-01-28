@@ -3,7 +3,7 @@ const {sequelize } = require('../util/database')
 
 module.exports = {
     Projects : sequelize.define('projects',{
-        project_id: {
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
@@ -11,8 +11,8 @@ module.exports = {
         },
         title: DataTypes.STRING,
         desc: DataTypes.TEXT,
-        start_date:DataTypes.DATE,
-        end_date:DataTypes.DATE,
-        completed: DataTypes.BOOLEAN
+        start:DataTypes.DATE,
+        end:DataTypes.DATE,
+        colorEvento: DataTypes.STRING
     })
 }

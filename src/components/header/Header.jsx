@@ -9,7 +9,7 @@ const Header = () => {
   const authCtx = useContext(AuthContext)
 
   return (
-    <div>
+    <div id= 'header'>
       {!authCtx.token && <NavLink to='/'>Landing</NavLink> }
       {authCtx.token && <div>
       <NavLink to='/Dashboard'>Dashboard</NavLink>

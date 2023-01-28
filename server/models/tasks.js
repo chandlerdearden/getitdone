@@ -3,7 +3,7 @@ const {sequelize } = require('../util/database')
 
 module.exports ={
     Tasks : sequelize.define('tasks', {
-        task_id: {
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
