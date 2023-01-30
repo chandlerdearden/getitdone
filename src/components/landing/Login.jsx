@@ -18,7 +18,8 @@ const Login = () => {
     }
     axios.post(`/login`, user)
     .then(({data}) => {
-      authCtx.login(data.token, data.exp, data.userId)      
+      console.log(data)
+      authCtx.login(data.token, data.exp, data.userId, data.color)      
     }
     )
     .catch(err => {

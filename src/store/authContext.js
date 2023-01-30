@@ -5,7 +5,8 @@ const AuthContext = createContext({
   token: "",
   login: () => {},
   logout: () => {},
-  userId: null
+  userId: null,
+  color: ''
 });
 
 const calculateTimer = (exp) => {
@@ -19,6 +20,7 @@ const getLocalStorage = () => {
     const storedToken = localStorage.getItem('token')
     const storedExp = localStorage.getItem('exp')
     const storedUserId = localStorage.getItem('userId')
+    const storedColor = localStorage.getItem('color')
 
     const remainingTime = calculateTimer(storedExp)
     
@@ -26,13 +28,15 @@ const getLocalStorage = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('exp')
         localStorage.removeItem('userId')
+        localStorage.removeItem('color')
         return null
     }
 
     return {
         token: storedToken,
         duration: remainingTime,
-        userId: +storedUserId
+        userId: +storedUserId,
+        color: ''
     }
 }
 
@@ -61,13 +65,14 @@ export const AuthContextProvider = (props) => {
     
   }
 
-  const login = (token, exp, userId) => {
+  const login = (token, exp, userId, color) => {
     setToken(token)
     setUserId(userId)
 
     localStorage.setItem('token', token)
     localStorage.setItem('exp', exp)
     localStorage.setItem('userId', userId)
+    localStorage.setItem('color', color)
 
     const remainingTime = calculateTimer(exp)
 
@@ -87,7 +92,7 @@ export const AuthContextProvider = (props) => {
     token,
     login,
     logout, 
-    userId
+    userId,
   }
 
   return (

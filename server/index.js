@@ -22,6 +22,8 @@ app.use(cors());
 const { register, login } = require('./controllers/authController')
 const { newTask, getTask } = require('./controllers/tasksController')
 const { newProject, getProjects} = require('./controllers/projectsController')
+const { getUser } = require('./controllers/profileController')
+
 
 Users.hasMany(Projects)
 Users.hasMany(Tasks)
@@ -43,6 +45,8 @@ app.get('/tasks/:userId', getTask)
 
 app.post('/projects', newProject)
 app.get('/projects/:userId', getProjects)
+
+app.get('/user/:userId', getUser )
 
 
 sequelize

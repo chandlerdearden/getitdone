@@ -32,14 +32,14 @@ module.exports = {
           const token = createToken(
             foundUser.dataValues.username,
             foundUser.dataValues.id
-          );
-          console.log(token);
+          )
           const exp = Date.now() + 1000 * 60 * 60 * 48;
           res.status(200).send({
             username: foundUser.dataValues.username,
             userId: foundUser.dataValues.id,
             token: token,
             exp,
+            color: foundUser.dataValues.color,
           });
         }
       } else {
