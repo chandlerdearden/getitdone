@@ -20,10 +20,10 @@ app.use(cors());
 
 // controller functions //
 const { register, login } = require('./controllers/authController')
-const { newTask, getTask } = require('./controllers/tasksController')
-const { newProject, getProjects} = require('./controllers/projectsController')
+const { newTask, getTask, deleteTask } = require('./controllers/tasksController')
+const { newProject, getProjects, deleteProject} = require('./controllers/projectsController')
 const { getUser } = require('./controllers/profileController')
-
+const {newMessage, getMessages, deleteMessage} = require('./controllers/messageController')
 
 Users.hasMany(Projects)
 Users.hasMany(Tasks)
@@ -42,11 +42,18 @@ app.post('/login', login)
 
 app.post('/tasks', newTask)
 app.get('/tasks/:userId', getTask)
+app.delete('/tasks/:id', deleteTask)
 
 app.post('/projects', newProject)
 app.get('/projects/:userId', getProjects)
+app.delete('/projects/:id', deleteProject)
+
 
 app.get('/user/:userId', getUser )
+
+app.post('/messages', newMessage)
+app.get('/messages/:userId', getMessages)
+app.delete('/messages/:id', deleteMessage)
 
 
 sequelize

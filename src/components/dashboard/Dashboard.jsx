@@ -46,7 +46,7 @@ const Dashboard = () => {
       setEvents(mappedEvents)
     }
     fetchData();
-  }, [addTaskModal]);
+  }, [addTaskModal, showTaskModal]);
 
   const eventModalHandler = (task) => {
     setShowTaskModal(true);

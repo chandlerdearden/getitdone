@@ -36,5 +36,17 @@ module.exports = {
         console.log(err)
         res.sendStatus(400)
     }
+  },
+  deleteTask : async (req,res) => {
+    try {
+      const { id } = req.params
+      await Tasks.destroy({where: {id: +id}})
+      res.sendStatus(200)
+      
+    }
+    catch(err) {
+      console.log(err)
+      res.sendStatus(400)
+    }
   }
 };
