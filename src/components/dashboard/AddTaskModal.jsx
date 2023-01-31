@@ -13,7 +13,6 @@ const getUsernames = async () => {
   const user = localStorage.getItem('userId')
    await axios.get(`/allusers/${user}`)
    .then(({data}) => {
-     console.log(data)
      setUsernames(data)
      
    }

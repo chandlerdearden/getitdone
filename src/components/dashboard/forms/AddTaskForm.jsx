@@ -19,34 +19,36 @@ const AddTaskForm = ({ setShow, usernames }) => {
   });
 
   const submitHandler = (e) => {
-    let user = localStorage.getItem("userId");
     e.preventDefault();
-    if (taskOrProject === "Task") {
-      let newTask = {
-        title,
-        desc,
-        start,
-        end,
-        colorEvento: color,
-        user_id: user,
-      };
-      axios.post("/tasks", newTask).then();
-      console.log(newTask);
-      setShow(false);
-    }
-    if (taskOrProject === "Project") {
-      let newProject = {
-        title: "Project: " + title,
-        desc,
-        start,
-        end,
-        colorEvento: color,
-        user_id: user,
-      };
-      axios.post("/projects", newProject).then(console.log("added Project"));
-      console.log(newProject);
-      setShow(false);
-    }
+    let user = localStorage.getItem("userId");
+    assignedUsers.forEach((assUser) => {
+      if (taskOrProject === "Task") {
+        let newTask = {
+          title,
+          desc,
+          start,
+          end,
+          colorEvento: color,
+          user_id: assUser.value,
+        };
+        axios.post("/tasks", newTask).then();
+        console.log(newTask);
+        setShow(false);
+      }
+      if (taskOrProject === "Project") {
+        let newProject = {
+          title: "Project: " + title,
+          desc,
+          start,
+          end,
+          colorEvento: color,
+          user_id: assUser.value,
+        };
+        axios.post("/projects", newProject).then(console.log("added Project"));
+        console.log(newProject);
+        setShow(false);
+      }
+    });
   };
 
   return (
