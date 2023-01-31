@@ -22,7 +22,7 @@ app.use(cors());
 const { register, login } = require('./controllers/authController')
 const { newTask, getTask, deleteTask } = require('./controllers/tasksController')
 const { newProject, getProjects, deleteProject} = require('./controllers/projectsController')
-const { getUser } = require('./controllers/profileController')
+const { getUser, getAllUsers } = require('./controllers/profileController')
 const {newMessage, getMessages, deleteMessage} = require('./controllers/messageController')
 
 Users.hasMany(Projects)
@@ -50,6 +50,7 @@ app.delete('/projects/:id', deleteProject)
 
 
 app.get('/user/:userId', getUser )
+app.get('/allusers/:userId', getAllUsers)
 
 app.post('/messages', newMessage)
 app.get('/messages/:userId', getMessages)
