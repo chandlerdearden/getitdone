@@ -70,7 +70,7 @@ const Login = ({toggleRegister}) => {
       <Form.Group className="mb-3" >
       <Row className="justify-content-md-center">
         <Col sm='8' className="text-center">
-        <Button variant="primary" type="submit">
+        <Button className="rounded-0" variant="primary" type="submit">
           Login
         </Button>
         </Col>

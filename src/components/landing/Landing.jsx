@@ -22,7 +22,7 @@ const Landing = () => {
           <Card className="shadow">
             <Card.Body>
               <div className="mb-3 mt-md-4">
-                <h2 className="fw-bold mb-2  text-center ">GitItDone</h2>
+                <h2 className="fw-bold mb-2  text-center ">GetItDone</h2>
                 <p className=" mb-5 text-center">
                   {register? "Please Fill in this form to create an account!": "Please Enter your Username and Password" }
                 </p>

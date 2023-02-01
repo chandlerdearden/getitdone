@@ -131,7 +131,7 @@ const Register = ({ toggleRegister }) => {
 
       <Form.Group>
         <Col className="text-center">
-        <Button variant="primary" type="submit">
+        <Button className="rounded-0" variant="primary" type="submit">
           Register
         </Button>
         </Col>

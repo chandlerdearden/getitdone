@@ -13,7 +13,7 @@ const App = () => {
   const authCtx = useContext(AuthContext)
   return (
     <div className="App">
-      {/* {authCtx.token && <Header/>} */}
+      {authCtx.token && <Header/>}
       <Routes>
         <Route path = '/' element = {!authCtx.token ?<Landing/> : <Navigate to='/Dashboard'/>}/>
         <Route path = '/Dashboard' element = {authCtx.token ?<Dashboard/> : <Navigate to='/'/>}/>

@@ -9,6 +9,7 @@ import axios from "axios";
 import AddTaskModal from "./AddTaskModal";
 import SideBar from "./SideBar";
 import "./dashboard.css"
+import { Container,Row,Col } from "react-bootstrap";
 
 const localizer = momentLocalizer(moment);
 
@@ -58,12 +59,13 @@ const Dashboard = () => {
   }
 
   return (
-    <div id="dash_container">
-      <div  id="calendar_container">
-      <div>
+    <>
+    <Container fluid className="d-flex m-0 w-100 justify-content-center">
+      <Row className="m-0 d-flex w-100">
+      <Col md={2}>
       <SideBar addTaskModal={handleAddTaskModal}/>
-      </div>
-      <div id="calendar">
+      </Col>
+      <Col md={10} id="calendar">
         <Calendar
           selectable
           onSelectEvent={(task) => eventModalHandler(task)}
@@ -72,20 +74,21 @@ const Dashboard = () => {
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 800, margin:10 }}
+          style={{ height: 800 }}
           eventPropGetter={(myEventsList) => {
             const backgroundColor = myEventsList.colorEvento
-              ? myEventsList.colorEvento
-              : "blue";
+            ? myEventsList.colorEvento
+            : "blue";
             const color = myEventsList.color ? myEventsList.color : "white";
             return { style: { backgroundColor, color } };
           }}
         />
-        </div>
+        </Col>
+      </Row>
+    </Container>
       {showTaskModal && <Popper show={setShowTaskModal} task={selectedTask} />}
       {addTaskModal && <AddTaskModal show={addTaskModal} setShow={setAddTaskModal}/>}
-    </div>
-    </div>
+          </>
   );
 };
 
