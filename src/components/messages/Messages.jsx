@@ -11,6 +11,7 @@ import {
   Tab,
   ListGroup,
 } from "react-bootstrap";
+import './message.css'
 
 const Messages = () => {
   const [userMessages, setUserMessages] = useState([]);
@@ -56,11 +57,12 @@ const Messages = () => {
     return userMessages.map((message) => {
       const string = `"#link${message.message_id}"`;
       return (
-        <Tab.Pane eventKey={string}>
-          <Row>
+        <Tab.Pane className="h-100" eventKey={string}>
+          <Row className="h-75 m-5 shadow border">
           <Col>{message.content}</Col>
           </Row>
           <Row className="m-0 p-0 w-100 d-flex justify-content-end">
+          <Col md={2} className='d-flex'><Button>Reply</Button></Col>
           <Col md={2} className='d-flex'><Button>Delete</Button></Col>
           </Row>
         </Tab.Pane>
@@ -85,14 +87,17 @@ const Messages = () => {
             </Col>
           </Row>
           <Tab.Container className="h-100">
-          <Row>
+          <Row className="m-0 p-0">
             <Col className="m-0 p-0 w-100">
               <ListGroup className="rounded-0" style={{ cursor: "pointer" }}>
+          <div id="scroll" className='border'style={{height:"60vh"}}>
                 {mappedLinks()}
+          </div>
               </ListGroup>
             </Col>
-            <Col>
-              <Tab.Content>{mappedTabs()}</Tab.Content>
+
+            <Col className="m-0 p-0 w-100">
+              <Tab.Content className="m-0 p-0 h-100 border">{mappedTabs()}</Tab.Content>
             </Col>
           </Row>
           </Tab.Container>
