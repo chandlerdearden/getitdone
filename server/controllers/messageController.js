@@ -23,16 +23,16 @@ module.exports ={
             const {userId} = req.params
             console.log(userId)
             const messages = await Messages.findAll({
-                where : {userId: userId},
-                include: [
-                    {
-                        model: Users,
-                        attributes: ['username']
-                        
-                    }
-                ]
-                
-            })
+                where: {userId: userId},
+                include: [{
+                    model: Users,
+                    attributes: ['username'],
+                }],
+                join: {
+                    from: 'messages.creator_id',
+                    to: 'users.id'
+                }
+            });
             res.status(200).send(messages)
         }
         catch(err) {

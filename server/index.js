@@ -23,7 +23,7 @@ const { register, login } = require('./controllers/authController')
 const { newTask, getTask, deleteTask } = require('./controllers/tasksController')
 const { newProject, getProjects, deleteProject} = require('./controllers/projectsController')
 const { getUser, getAllUsers } = require('./controllers/profileController')
-const {newMessage, getMessages, deleteMessage} = require('./controllers/messageController')
+const {newMessage, getMessages, deleteMessage, autoMessage} = require('./controllers/messageController')
 
 Users.hasMany(Projects)
 Users.hasMany(Tasks)
@@ -34,6 +34,7 @@ Roles.belongsTo(Users)
 
 Users.hasMany(Messages)
 Messages.belongsTo(Users)
+Messages.belongsTo(Users, {foreignKey: 'creator_id'});
 
 
 // end Points //

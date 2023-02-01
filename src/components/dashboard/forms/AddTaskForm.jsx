@@ -30,6 +30,7 @@ const AddTaskForm = ({ setShow, usernames }) => {
           end,
           colorEvento: color,
           user_id: assUser.value,
+          creator_id: user
         };
         axios.post("/tasks", newTask).then();
         console.log(newTask);
@@ -43,6 +44,7 @@ const AddTaskForm = ({ setShow, usernames }) => {
           end,
           colorEvento: color,
           user_id: assUser.value,
+          creator_id: user
         };
         axios.post("/projects", newProject).then(console.log("added Project"));
         console.log(newProject);

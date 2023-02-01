@@ -1,66 +1,100 @@
-import React from 'react'
+import React from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
-import { useState, useContext } from 'react';
-import axios from 'axios'
-import AuthContext from '../../store/authContext';
+import { useState, useContext } from "react";
+import axios from "axios";
+import AuthContext from "../../store/authContext";
+import Container from "react-bootstrap/Container";
 
-const Login = () => {
-  const authCtx = useContext(AuthContext)
+const Login = ({toggleRegister}) => {
+  const authCtx = useContext(AuthContext);
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const loginHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const user = {
       username,
       password,
-    }
-    axios.post(`/login`, user)
-    .then(({data}) => {
-      console.log(data)
-      authCtx.login(data.token, data.exp, data.userId, data.color)      
-    }
-    )
-    .catch(err => {
-      console.log(err)
-    setPassword('')
-    setUsername('')
-    })
-  
-    console.log('Login User')
-  }
+    };
+    axios
+      .post(`/login`, user)
+      .then(({ data }) => {
+        console.log(data);
+        authCtx.login(data.token, data.exp, data.userId, data.color);
+      })
+      .catch((err) => {
+        console.log(err);
+        setPassword("");
+        setUsername("");
+      });
+
+    console.log("Login User");
+  };
   return (
-    <Form onSubmit ={loginHandler}>
-    <Form.Group as={Row} controlId="formUsername">
-      <Form.Label column sm="2">
-        Username
-      </Form.Label>
-      <Col sm="10">
-        <Form.Control onChange={(e) => {
-          setUsername(e.target.value)
-        }
-        } type="text" placeholder="Username" />
-      </Col>
-    </Form.Group>
+    <Form onSubmit={loginHandler}>
+      <Form.Group className="mb-3"  controlId="formUsername">
+        <Row className="justify-content-md-center">
+        <Col sm="8">
+        <Form.Label>
+          Username
+        </Form.Label>
+          <Form.Control
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+            type="text"
+            placeholder="Username"
+          />
+        </Col>
+        </Row>
+      </Form.Group>
 
-    <Form.Group as={Row} controlId="formPassword">
-      <Form.Label column sm="2">
-        Password
-      </Form.Label>
-      <Col sm="10">
-        <Form.Control onChange={(e) => { setPassword(e.target.value)
-          
-        }
-        } type="password" placeholder="Password" />
-      </Col>
-    </Form.Group>
+      <Form.Group className="mb-3"  controlId="formPassword">
+        <Row className="justify-content-md-center">
+        <Col sm="8">
+        <Form.Label>
+          Password
+        </Form.Label>
+          <Form.Control
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            type="password"
+            placeholder="Password"
+          />
+        </Col>
+        </Row>
+      </Form.Group>
 
-    <Button variant="primary" type="submit">
-      Login
-    </Button>
-        </Form>
-  )
-}
+      <Form.Group className="mb-3" >
+      <Row className="justify-content-md-center">
+        <Col sm='8' className="text-center">
+        <Button variant="primary" type="submit">
+          Login
+        </Button>
+        </Col>
+      </Row>
+      </Form.Group>
 
-export default Login
+
+
+      <div className="mt-3">
+        <p className="mb-0  text-center">
+          Don't have an account?{" "}
+          <a
+            onClick={() => {
+              toggleRegister();
+            }}
+            className="text-primary fw-bold"
+            style={{cursor: 'pointer'}}
+          >
+            Sign Up
+          </a>
+        </p>
+      </div>
+    </Form>
+  );
+};
+
+export default Login;

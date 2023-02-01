@@ -1,6 +1,5 @@
 import { Modal, Button } from "react-bootstrap";
 import React from 'react'
-import './popper.css'
 import ReactDom from "react-dom";
 import axios from "axios";
 

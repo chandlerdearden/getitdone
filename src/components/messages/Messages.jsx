@@ -7,11 +7,22 @@ import { Button } from 'react-bootstrap'
 
 const Messages = () => {
   const [userMessages, setUserMessages] = useState([])
+  const [usernames, setUsernames] = useState([])
 
-  const getMessages = () => {
+  const getUsernames = async () => {
+    const user = localStorage.getItem('userId')
+     await axios.get(`/allusers/${user}`)
+     .then(({data}) => {
+       setUsernames(data)
+       
+     }
+     )
+  }
+
+  const getMessages = async () => {
     const user = localStorage.getItem('userId')
     console.log("got messages")
-    axios.get(`/messages/${user}`)
+    await axios.get(`/messages/${user}`)
     .then(({data}) => {
       setUserMessages(data)
       console.log(data)
@@ -44,6 +55,7 @@ const Messages = () => {
   
 
   useEffect(() => {
+    getUsernames()
     getMessages()
     mappedMessages()
   }, [])
@@ -57,7 +69,7 @@ const Messages = () => {
       </div>
       Received Messages
       <div>
-        <AddmessageForm getMessages={getMessages}/>
+        <AddmessageForm usernames={usernames} getMessages={getMessages}/>
       </div>
     </div>
 
