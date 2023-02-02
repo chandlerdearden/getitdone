@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Container,Row,Col } from 'react-bootstrap'
+import ProfileCard from './ProfileCard'
 
 const Profile = () => {
   const [userId, setUserId] = useState(localStorage.getItem('userId'))
@@ -28,18 +30,14 @@ const Profile = () => {
   }, []);
   
   return (
-    <div>
-      <div style={{backgroundColor:color, height: 200}}>Profile Image {user.username}</div>
-      <div>
-        <h3>First Name: {user.firstname}</h3>
-        <h3>Last Name: {user.lastname}</h3>
-        <h3>Email: {user.email}</h3>
-        <h5>Change Password?</h5>
-        <div>
-          Assigned Tasks
-        </div>
-      </div>
-    </div>
+    <Container fluid className=' d-flex border  h-100'>
+      <Row>
+        <ProfileCard user={user}/>
+      </Row>
+      <Row>
+  
+      </Row>
+    </Container>
   )
 }
 

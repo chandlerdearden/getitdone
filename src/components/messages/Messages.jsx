@@ -76,9 +76,9 @@ const Messages = () => {
   }, []);
 
   return (
-      <Container fluid className="border d-flex h-100 " >
-        <Row className="w-100 h-100 border m-5 border-dark">
-          <Row className="align-items-center border-bottom m-0 p-0">
+      <Container fluid className="d-flex h-100 " >
+        <Row className="w-100 h-100 m-5">
+          <Row className="align-items-center m-0 p-0">
             <Col>
               <h1>Messages</h1>
             </Col>

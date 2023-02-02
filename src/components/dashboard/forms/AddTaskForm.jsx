@@ -18,17 +18,30 @@ const AddTaskForm = ({ setShow, usernames }) => {
     return { value: user.id, label: user.username };
   });
 
+  const colorOptions = [
+    {value: "red", label: "Red"},
+    {value: "green", label: "Green"},
+    {value: "blue", label: "Blue"},
+    {value: "orange", label: "Orange"},
+    {value: "purple", label: "Purple"},
+  ]
+
+  const mappedColorOptions = colorOptions.map((color) => {
+    return color
+  }
+  )
+
   const submitHandler = (e) => {
     e.preventDefault();
     let user = localStorage.getItem("userId");
     assignedUsers.forEach((assUser) => {
       if (taskOrProject === "Task") {
         let newTask = {
-          title,
+          title: "Task: " + title,
           desc,
           start,
           end,
-          colorEvento: color,
+          colorEvento: color.value,
           user_id: assUser.value,
           creator_id: user
         };
@@ -42,7 +55,7 @@ const AddTaskForm = ({ setShow, usernames }) => {
           desc,
           start,
           end,
-          colorEvento: color,
+          colorEvento: color.value,
           user_id: assUser.value,
           creator_id: user
         };
@@ -93,13 +106,17 @@ const AddTaskForm = ({ setShow, usernames }) => {
           <Form.Label>End Date</Form.Label>
           <Form.Control type="datetime-local" />
         </Form.Group>
-        <Form.Group
-          onChange={(e) => setColor(e.target.value)}
-          controlId="color"
-        >
-          <Form.Label>Color</Form.Label>
-          <Form.Control type="color" />
+        
+
+        <Form.Group>
+        <Form.Label>Color</Form.Label>
+          <Select
+          onChange={(selected)=> setColor(selected)}
+          name="color"
+          isClearable={isClearable}
+          options={mappedColorOptions}/>
         </Form.Group>
+
         Assign Users?
         <Select
           onChange={(selectedValues) => setAssignedUsers(selectedValues)}
@@ -109,7 +126,9 @@ const AddTaskForm = ({ setShow, usernames }) => {
           options={options}
           className="basic-multi-select"
           classNamePrefix="select"
-        />
+          />
+          <br/>
+
         <Button variant="primary" type="submit">
           Submit
         </Button>

@@ -5,10 +5,10 @@ module.exports = {
   newTask: async (req, res) => {
     try {
       console.log(req.body);
-      const { title, desc, colorEvento, start, end, user_id } = req.body;
+      const { title, desc, colorEvento,creator_id, start, end, user_id } = req.body;
       // console.log(parseInt(user_id,10))
       await Tasks.create({
-        title: `Task: ${title}`,
+        title,
         desc: desc,
         colorEvento: colorEvento,
         start: start,
