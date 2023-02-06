@@ -2,6 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 import React from 'react'
 import ReactDom from "react-dom";
 import axios from "axios";
+import CloseButton from 'react-bootstrap/CloseButton';
 
 const Popper = ({task, show}) => {
 
@@ -25,16 +26,18 @@ const Popper = ({task, show}) => {
   
 
   return ReactDom.createPortal(
-    <div id="modal_wrapper">
     <Modal id="modal_container" show={show}>
-      <Modal.Header>{task.title}{task.id}</Modal.Header>
-      <Modal.Body>{task.desc}</Modal.Body>
+      <Modal.Header><CloseButton onClick={() => show(false)}/></Modal.Header>
+      <Modal.Body>
+        <h1>{task.title}</h1>
+        <p>{task.desc}</p>
+      </Modal.Body>
       <Modal.Footer>
         <Button onClick={() => show(false)}>Close</Button>
-        <Button onClick={() => deleteHandler(task.id, task.title)}>Delete Task</Button>
+        <Button onClick={() => deleteHandler(task.id, task.title)}>Delete</Button>
       </Modal.Footer>
     </Modal>
-    </div>,
+  ,
     document.getElementById("task-modal")
   )
 }

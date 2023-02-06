@@ -1,15 +1,21 @@
 import React from "react";
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 import axios from "axios";
 import Select from "react-select";
+import ReactDom from "react-dom";
+import CloseButton from 'react-bootstrap/CloseButton';
 
-const AddmessageForm = ({ getMessages, usernames }) => {
+
+
+
+const AddmessageForm = ({ getMessages, usernames, show, setShow }) => {
   const [creator_id, setCreatorId] = useState(localStorage.getItem("userId"));
   const [content, setContent] = useState("");
   const [subject, setSubject] = useState("");
   const [assignedUsers, setAssignedUsers] = useState();
   const [isClearable, setIsClearable] = useState(true);
+
 
   const options = usernames.map((user) => {
     return { value: user.id, label: user.username };
@@ -32,8 +38,12 @@ const AddmessageForm = ({ getMessages, usernames }) => {
       getMessages();
     });
   };
-  return (
-    <div>
+  return ReactDom.createPortal(
+    <Modal show={show} className="">
+      <Modal.Header><h3>New Message</h3><CloseButton onClick={()=> setShow(false)}/></Modal.Header>
+      <Modal.Body>
+      <div>
+        <label>To:</label>
       <Select
         onChange={(selectedValues) => setAssignedUsers(selectedValues)}
         isClearable={isClearable}
@@ -43,6 +53,7 @@ const AddmessageForm = ({ getMessages, usernames }) => {
         className="basic-multi-select"
         classNamePrefix="select"
       />
+      </div>
       <Form onSubmit={submitHandler}>
         <Form.Group
           onChange={(e) => setSubject(e.target.value)}
@@ -57,15 +68,17 @@ const AddmessageForm = ({ getMessages, usernames }) => {
           controlId="description"
         >
           <Form.Label>Details</Form.Label>
-          <Form.Control type="text" placeholder="Enter Description" />
+          <Form.Control as='textarea' type="text" placeholder="Enter Description" />
         </Form.Group>
 
         <Button variant="primary" type="submit">
           Submit
         </Button>
       </Form>
-    </div>
-  );
+      </Modal.Body>
+    </Modal>,
+   document.getElementById("addmessage-modal")
+  )
 };
 
 export default AddmessageForm;

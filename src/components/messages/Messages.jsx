@@ -10,12 +10,15 @@ import {
   Card,
   Tab,
   ListGroup,
+  Badge
 } from "react-bootstrap";
 import './message.css'
 
 const Messages = () => {
   const [userMessages, setUserMessages] = useState([]);
   const [usernames, setUsernames] = useState([]);
+  const [showForm, setShowForm] = useState(false)
+  const [state, setState] = useState('')
 
   const getUsernames = async () => {
     const user = localStorage.getItem("userId");
@@ -41,12 +44,24 @@ const Messages = () => {
     getMessages();
   };
 
+  const readHandler = (message) => {
+    if(!message.read) {
+      axios.put(`/readMessage`, {id: message.message_id})
+      setState('updateData')
+    } else{
+
+    }
+  }
   const mappedLinks = () => {
-    return userMessages.map((message) => {
+    return userMessages.sort((a, b) => (+b.message_id > +a.message_id ? 1 : -1)).map((message) => {
       const string = `"#link${message.message_id}"`;
       // console.log(string)
       return (
-        <ListGroup.Item className="d-flex" href={string}>
+        <ListGroup.Item key={message.message_id} onClick={()=> readHandler(message)} className="d-flex" href={string}>
+          {!message.read && 
+          <div className="justify-content-center align-items-center">
+          <Badge bg="secondary">New</Badge>
+          </div>}
           From: {message.user.username} <br /> {message.subject}
         </ListGroup.Item>
       );
@@ -54,16 +69,20 @@ const Messages = () => {
   };
 
   const mappedTabs = () => {
-    return userMessages.map((message) => {
+    return userMessages.sort((a, b) => (+b.message_id > +a.message_id ? 1 : -1)).map((message) => {
       const string = `"#link${message.message_id}"`;
       return (
-        <Tab.Pane className="h-100" eventKey={string}>
+        <Tab.Pane key={message.message_id} className="h-100" eventKey={string}>
           <Row className="h-75 m-5 shadow border">
-          <Col>{message.content}</Col>
+          <Col className="m-3">
+          <h3 className="border-bottom">From: {message.user.username}</h3>
+          <h4>{message.subject}</h4>
+          <p className="h-75 m-3 p-3">{message.content}</p>
+          </Col>
           </Row>
           <Row className="m-0 p-0 w-100 d-flex justify-content-end">
           <Col md={2} className='d-flex'><Button>Reply</Button></Col>
-          <Col md={2} className='d-flex'><Button>Delete</Button></Col>
+          <Col md={2} className='d-flex'><Button onClick={()=> deleteHandler(message.message_id)}>Delete</Button></Col>
           </Row>
         </Tab.Pane>
       );
@@ -73,9 +92,11 @@ const Messages = () => {
   useEffect(() => {
     getUsernames();
     getMessages();
-  }, []);
+    mappedLinks();
+  }, [state]);
 
   return (
+    <>
       <Container fluid className="d-flex h-100 " >
         <Row className="w-100 h-100 m-5">
           <Row className="align-items-center m-0 p-0">
@@ -83,7 +104,7 @@ const Messages = () => {
               <h1>Messages</h1>
             </Col>
             <Col>
-            <Button className="rounded-0">Send Message</Button>
+            <Button onClick={()=> setShowForm(true)} className="rounded-0">Send Message</Button>
             </Col>
           </Row>
           <Tab.Container className="h-100">
@@ -103,9 +124,9 @@ const Messages = () => {
           </Tab.Container>
         </Row>
       </Container>
-      /* <Row>
-          <AddmessageForm usernames={usernames} getMessages={getMessages} />
-        </Row> */
+        <AddmessageForm setShow={setShowForm}  show = {showForm} usernames={usernames} getMessages={getMessages} />
+    </>
+  
   );
 };
 

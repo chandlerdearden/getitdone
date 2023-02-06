@@ -23,7 +23,7 @@ const { register, login } = require('./controllers/authController')
 const { newTask, getTask, deleteTask } = require('./controllers/tasksController')
 const { newProject, getProjects, deleteProject} = require('./controllers/projectsController')
 const { getUser, getAllUsers } = require('./controllers/profileController')
-const {newMessage, getMessages, deleteMessage, autoMessage} = require('./controllers/messageController')
+const {newMessage, getMessages, deleteMessage, autoMessage, readMessage} = require('./controllers/messageController')
 
 Users.hasMany(Projects)
 Users.hasMany(Tasks)
@@ -54,6 +54,7 @@ app.get('/user/:userId', getUser )
 app.get('/allusers/:userId', getAllUsers)
 
 app.post('/messages', newMessage)
+app.put('/readMessage', readMessage)
 app.get('/messages/:userId', getMessages)
 app.delete('/messages/:id', deleteMessage)
 

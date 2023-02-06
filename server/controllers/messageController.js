@@ -50,5 +50,17 @@ module.exports ={
             console.log(err)
             res.sendStatus(400)
         }
+    },
+
+    readMessage: async ( req,res ) => {
+        try{
+            const {id} = req.body
+            await Messages.update({read: true}, {where: {message_id: id}})
+            res.sendStatus(200)
+        }
+        catch(err){
+            console.log(err)
+            res.sendStatus(400)
+        }
     }
 }

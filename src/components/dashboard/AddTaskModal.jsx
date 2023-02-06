@@ -5,6 +5,7 @@ import './popper.css'
 import ReactDom from "react-dom";
 import AddTaskForm from "./forms/AddTaskForm";
 import axios from "axios";
+import CloseButton from 'react-bootstrap/CloseButton';
 
 const AddTaskModal = ({setShow, show}) => {
   const [usernames, setUsernames] = useState([])
@@ -26,12 +27,12 @@ const getUsernames = async () => {
   return ReactDom.createPortal(
     <div id="modal_wrapper">
     <Modal id="modal_container" show={show}>
-      <Modal.Header></Modal.Header>
+      <Modal.Header><CloseButton onClick={() => setShow(false)}/></Modal.Header>
       <Modal.Body>
         <AddTaskForm usernames={usernames} setShow={setShow}/>  
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => setShow(false)}>Close</Button>
+        {/* <Button onClick={() => setShow(false)}>Cancel</Button> */}
       </Modal.Footer>
     </Modal>
     </div>,

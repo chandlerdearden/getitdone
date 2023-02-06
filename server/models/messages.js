@@ -11,6 +11,11 @@ module.exports = {
         },
         creator_id: DataTypes.INTEGER,
         content: DataTypes.STRING,
-        subject: DataTypes.STRING
+        subject: DataTypes.STRING,
+        read: {
+            type :DataTypes.BOOLEAN,
+            defaultValue: false
+        } 
+            
     })
 }
