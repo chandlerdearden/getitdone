@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import { BsFilter, BsPlusSquare } from "react-icons/bs";
 
-const SideBar = ({ addTaskModal }) => {
+const SideBar = ({ byTasks, byProjects ,addTaskModal, filterByTasks, filterByProjects }) => {
   return (
     <>
       <Container fluid className="h-100 m-0">
@@ -14,8 +14,8 @@ const SideBar = ({ addTaskModal }) => {
         </Row>
         <Row>
           <Form>
-            <Form.Check className="m-3" type="checkbox" label="Projects" />
-            <Form.Check className="m-3" type="checkbox" label="Tasks" />
+            <Form.Check onClick={()=> filterByProjects(!byProjects)} className="m-3" type="checkbox" label="Projects" />
+            <Form.Check onClick={()=> filterByTasks(!byTasks)} className="m-3" type="checkbox" label="Tasks" />
           </Form>
         </Row>
         <Row>

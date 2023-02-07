@@ -10,6 +10,7 @@ import AddTaskModal from "./AddTaskModal";
 import SideBar from "./SideBar";
 import "./dashboard.css"
 import { Container,Row,Col } from "react-bootstrap";
+import { BsCheckLg } from "react-icons/bs";
 
 const localizer = momentLocalizer(moment);
 
@@ -20,6 +21,8 @@ const Dashboard = () => {
   const [projects, setProjects] = useState([])
   const [events, setEvents] = useState([])
   const [selectedTask, setSelectedTask] = useState({});
+  const [byTasks, setByTasks] = useState(false)
+  const [byProjects, setByProjects] = useState(false)
   
   useEffect(() => {
 
@@ -28,8 +31,6 @@ const Dashboard = () => {
       const userTasks = await axios.get(`/tasks/${user}`);
       const userProjects = await axios.get(`/projects/${user}`);
       const mergedData = [...userTasks.data, ...userProjects.data]
-      setTasks(userTasks);
-      setProjects(userProjects)
       const mappedEvents = mergedData.map(event => {
         let {id, start, end, title, desc, colorEvento, userId} = event
         start = new Date(start)
@@ -44,6 +45,8 @@ const Dashboard = () => {
           userId
         }
       })
+      setTasks(userTasks.data)
+      setProjects(userProjects.data)
       setEvents(mappedEvents)
     }
     fetchData();
@@ -58,12 +61,27 @@ const Dashboard = () => {
     setAddTaskModal(true)
   }
 
+  const filterEvents = () => {
+    if(byProjects === true && byTasks === false) {
+      return projects
+    } else if (byTasks === true && byProjects === false) {
+      return tasks
+    } else {
+      return events
+    }
+  }
+
   return (
     <>
     <Container fluid className="d-flex m-0 w-100 justify-content-center">
       <Row className="m-0 d-flex w-100">
       <Col md={2}>
-      <SideBar addTaskModal={handleAddTaskModal}/>
+      <SideBar
+      byTasks = {byTasks}
+      byProjects = {byProjects} 
+      filterByTasks={setByTasks} 
+      filterByProjects={setByProjects} 
+      addTaskModal={handleAddTaskModal}/>
       </Col>
       <Col md={10} id="calendar">
         <Calendar
@@ -71,7 +89,7 @@ const Dashboard = () => {
           onSelectEvent={(task) => eventModalHandler(task)}
           // onSelectSlot={handleOnSelectSlot}
           localizer={localizer}
-          events={events}
+          events={filterEvents()}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 800 }}

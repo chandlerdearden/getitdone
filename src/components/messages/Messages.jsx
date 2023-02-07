@@ -60,7 +60,7 @@ const Messages = () => {
         <ListGroup.Item key={message.message_id} onClick={()=> readHandler(message)} className="d-flex" href={string}>
           {!message.read && 
           <div className="justify-content-center align-items-center">
-          <Badge bg="secondary">New</Badge>
+          <Badge bg="info">New</Badge>
           </div>}
           From: {message.user.username} <br /> {message.subject}
         </ListGroup.Item>

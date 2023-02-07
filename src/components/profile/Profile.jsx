@@ -27,7 +27,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <Container fluid className="m-5  d-flex">
+    <Container fluid className="m-0">
       <Row md={4} className="m-0">
       <ProfileCard user={user}/>
       </Row>
