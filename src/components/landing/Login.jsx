@@ -10,12 +10,13 @@ const Login = ({toggleRegister}) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginErr, setLoginErr] = useState(false)
   const loginHandler = (e) => {
     e.preventDefault();
 
     const user = {
-      username,
-      password,
+      username: username.trim(),
+      password: password.trim()
     };
     axios
       .post(`/login`, user)
@@ -25,6 +26,7 @@ const Login = ({toggleRegister}) => {
       })
       .catch((err) => {
         console.log(err);
+        setLoginErr(true)
         setPassword("");
         setUsername("");
       });
@@ -68,6 +70,7 @@ const Login = ({toggleRegister}) => {
       </Form.Group>
 
       <Form.Group className="mb-3" >
+        <Row className="justify-content-md-center m-2" style={{color: "red"}}>{loginErr && "The Username or Password you entered is incorrect"}</Row>
       <Row className="justify-content-md-center">
         <Col sm='8' className="text-center">
         <Button className="rounded-0" variant="primary" type="submit">

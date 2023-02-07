@@ -19,6 +19,7 @@ const Header = (props) => {
   const expand = 'md'
   const [show, setShow] = useState(false);
 
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -26,22 +27,24 @@ const Header = (props) => {
     <>
       <Navbar key={expand} bg="light" expand={expand} className="m-3 border-bottom border-primary">
         <Container fluid>
-          <Navbar.Brand href="#">GetItDone</Navbar.Brand>
+          <Navbar.Brand href="/Dashboard">GetItDone</Navbar.Brand>
+          {authCtx.token ?
+          <>
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Nav.Link href='/Dashboard'>DashBoard</Nav.Link>
                 <Nav.Link href='/Messages'>Messages</Nav.Link>
-                <Nav.Link onClick={handleShow}>Profile</Nav.Link>
                 <Offcanvas placement="end" show={show} onHide={handleClose} {...props}>
                     <Offcanvas.Header>
                       <CloseButton onClick={handleClose}/>
-                      {/* <Offcanvas.Title>Profile</Offcanvas.Title> */}
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                       <Profile/>
                     </Offcanvas.Body>
                 </Offcanvas>
               </Nav>
-              <Button className="rounded-0" onClick={()=>authCtx.logout()}>Logout</Button>
+                <Button className="rounded-0" onClick={()=>authCtx.logout()}>Logout</Button>
+          </>
+         : <></> }
         </Container>
       </Navbar>
   </>

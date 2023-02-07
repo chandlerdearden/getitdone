@@ -17,11 +17,11 @@ const Register = ({ toggleRegister }) => {
     e.preventDefault();
     if (username && password) {
       const registerUser = {
-        username,
-        password,
-        email,
-        firstName,
-        lastName,
+        username: username.trim(),
+        password: password.trim(),
+        email: email.trim(),
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
         color: "red",
       };
       console.log(registerUser);

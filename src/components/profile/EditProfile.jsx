@@ -1,13 +1,17 @@
 import React from "react";
-import { Form, Row, Col, Button } from "react-bootstrap";
+import { Form, Row, Col, Button, Modal } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
+import ReactDom from "react-dom";
+import CloseButton from 'react-bootstrap/CloseButton';
 
-const EditProfile = ({ user }) => {
-  return (
-    <Card className="d-flex border-0">
-      <h1 className="border-bottom">Edit Profile</h1>
-        <Form>
+
+const EditProfile = ({ user, show,setShow }) => {
+  return ReactDom.createPortal(
+    <Modal show={show}>
+      <Modal.Header> <CloseButton onClick={()=> setShow(!show)}/></Modal.Header>
+      <Card className="d-flex border-0">
+        <h1 className="border-bottom">Edit Profile</h1>
+        <Form onSubmit={()=> setShow(!show)}>
           <Row>
             <Form.Group className="m-0">
               <Form.Label className="m-0">Username</Form.Label>
@@ -34,10 +38,14 @@ const EditProfile = ({ user }) => {
             <Form.Control type="text" defaultValue={user.email} />
           </Form.Group>
         </Form>
-      <Col className="justify-content-end">
-        <Button className="rounded-0 m-1" type="submit">Save Changes</Button>
-      </Col>
-    </Card>
+        <Col className="justify-content-end">
+          <Button className="rounded-0 m-1" type="submit">
+            Save Changes
+          </Button>
+        </Col>
+      </Card>
+    </Modal>,
+    document.getElementById("editProfile-modal")
   );
 };
 

@@ -4,6 +4,7 @@ import AuthContext from "../../store/authContext";
 import { Form, Button, Col, Row, Container, Card } from "react-bootstrap";
 import Login from "./Login";
 import Register from "./Register";
+import Header from "../header/Header";
 
 const Landing = () => {
   const [register, setRegister] = useState(false);
@@ -15,9 +16,11 @@ const Landing = () => {
   };
 
   return (
-    <Container>
-      <Row className="vh-100 d-flex justify-content-center align-items-center">
-        <Col md={8} lg={6} xs={12}>
+  <>
+  <Header/>
+    <Container fluid className="">
+      <Row className="vh-100 d-flex justify-content-center">
+        <Col md={8} lg={6} xs={12} className="m-4">
           <div className="border border-3 border-primary"></div>
           <Card className="shadow">
             <Card.Body>
@@ -26,13 +29,14 @@ const Landing = () => {
                 <p className=" mb-5 text-center">
                   {register? "Please Fill in this form to create an account!": "Please Enter your Username and Password" }
                 </p>
-              <Row>{register ? <Register toggleRegister={toggleRegister}/> : <Login toggleRegister={toggleRegister} />}</Row>
+              <Row className="m-5">{register ? <Register toggleRegister={toggleRegister}/> : <Login toggleRegister={toggleRegister} />}</Row>
               </div>
             </Card.Body>
           </Card>
         </Col>
       </Row>
     </Container>
+  </>
   );
 };
 
