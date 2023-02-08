@@ -30,4 +30,17 @@ module.exports = {
       res.sendStatus(400);
     }
   },
+
+  updateUser: async ( req, res ) => {
+    try{
+        const {userId} = req.params
+        const {firstname, lastname, username, email} = req.body
+        await Users.update({firstname, lastname, username, email}, {where: {id: +userId}})
+        res.sendStatus(200)
+    }
+    catch(err){
+      res.sendStatus(400)
+      console.log(err)
+    }
+  }
 };

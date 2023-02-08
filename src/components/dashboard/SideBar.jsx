@@ -13,7 +13,7 @@ const SideBar = ({
 }) => {
   return (
     <>
-      <Container Fluid className="h-100 m-0 border p-3 shadow">
+      <Container fluid className="h-100 m-0 border p-3 shadow">
         <Row className="border-0">
           <Profile />
         </Row>

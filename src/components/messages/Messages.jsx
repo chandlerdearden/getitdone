@@ -82,7 +82,7 @@ const Messages = () => {
           </Row>
           <Row>
           <Col className=" mx-5 d-flex justify-content-end" >
-          <Button className="mx-2 rounded-0">Reply</Button>
+          <Button onClick={()=> setShowForm(true)} className="mx-2 rounded-0">Reply</Button>
           <Button className="rounded-0" onClick={()=> deleteHandler(message.message_id)}>Delete</Button>
           </Col>
           </Row>
@@ -114,7 +114,7 @@ const Messages = () => {
             <Col className="m-0 p-0 w-100">
               <ListGroup className="rounded-0" style={{ cursor: "pointer" }}>
           <div id="scroll" className='border'style={{height:"60vh"}}>
-                {mappedLinks()}
+                {userMessages.length > 0 ? mappedLinks() : <h3 className="text-center">No Mesages</h3>}
           </div>
               </ListGroup>
             </Col>
