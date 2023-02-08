@@ -40,9 +40,10 @@ const AddmessageForm = ({ getMessages, usernames, show, setShow }) => {
   };
   return ReactDom.createPortal(
     <Modal show={show} className="">
-      <Modal.Header><h3>New Message</h3><CloseButton onClick={()=> setShow(false)}/></Modal.Header>
+      <Modal.Header className="border-0"><CloseButton onClick={()=> setShow(false)}/></Modal.Header>
       <Modal.Body>
-      <div>
+        <h1>New Message</h1>
+      <div className="py-2">
         <label>To:</label>
       <Select
         onChange={(selectedValues) => setAssignedUsers(selectedValues)}
@@ -56,22 +57,24 @@ const AddmessageForm = ({ getMessages, usernames, show, setShow }) => {
       </div>
       <Form onSubmit={submitHandler}>
         <Form.Group
+        className="py-2"
           onChange={(e) => setSubject(e.target.value)}
           controlId="subject"
         >
-          <Form.Label>Subject</Form.Label>
+          <Form.Label className="m-0">Subject</Form.Label>
           <Form.Control type="text" placeholder="Enter Title" />
         </Form.Group>
 
         <Form.Group
+        className="py-2"
           onChange={(e) => setContent(e.target.value)}
           controlId="description"
         >
-          <Form.Label>Details</Form.Label>
+          <Form.Label className="m-0">Details</Form.Label>
           <Form.Control as='textarea' type="text" placeholder="Enter Description" />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button className="rounded-0 my-1" variant="primary" type="submit">
           Submit
         </Button>
       </Form>

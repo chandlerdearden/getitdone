@@ -28,8 +28,8 @@ const Profile = () => {
 
   return (
     <>
-      <Container fluid className="m-0">
-        <Row className="m-0">
+      <Container className="m-0">
+        <Row className="m-0 justify-content-center">
           <ProfileCard user={user} show={show} setShow={setShow} />
         </Row>
       </Container>

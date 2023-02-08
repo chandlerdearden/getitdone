@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, ButtonGroup, Button } from "react-bootstrap";
+import { Form, ButtonGroup, Button, Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
@@ -66,8 +66,9 @@ const AddTaskForm = ({ setShow, usernames }) => {
   };
 
   return (
-    <div>
-      <ButtonGroup aria-label="Basic example">
+    <>
+      <h1 className="mx-3">Add {taskOrProject}</h1>
+      <ButtonGroup className="mx-3" aria-label="Basic example">
         <Button
           className="rounded-0"
           onClick={() => setTaskOrProject("Project")}
@@ -83,10 +84,9 @@ const AddTaskForm = ({ setShow, usernames }) => {
           Task
         </Button>
       </ButtonGroup>
-      <h1>Add {taskOrProject}</h1>
       <Form className="m-3" onSubmit={submitHandler}>
-        <Form.Group>
-          <Form.Label>Assign Users</Form.Label>
+        <Form.Group className="py-2">
+          <Form.Label className="m-0">Assign Users</Form.Label>
           <Select
             onChange={(selectedValues) => setAssignedUsers(selectedValues)}
             isClearable={isClearable}
@@ -98,31 +98,16 @@ const AddTaskForm = ({ setShow, usernames }) => {
           />
         </Form.Group>
         <Form.Group
+        className="py-2"
           onChange={(e) => setTitle(e.target.value)}
           controlId="title"
         >
-          <Form.Label>Title</Form.Label>
+          <Form.Label className="m-0">Title</Form.Label>
           <Form.Control type="text" placeholder="Enter Title" />
         </Form.Group>
-        
-        <Form.Group
-          onChange={(e) => setStart(e.target.value)}
-          controlId="startDate"
-        >
-          <Form.Label>Start Date</Form.Label>
-          <Form.Control type="datetime-local" />
-        </Form.Group>
 
-        <Form.Group
-          onChange={(e) => setEnd(e.target.value)}
-          controlId="endDate"
-        >
-          <Form.Label>End Date</Form.Label>
-          <Form.Control type="datetime-local" />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Color</Form.Label>
+        <Form.Group className="py-2">
+          <Form.Label className="m-0">Color</Form.Label>
           <Select
             onChange={(selected) => setColor(selected)}
             name="color"
@@ -131,23 +116,48 @@ const AddTaskForm = ({ setShow, usernames }) => {
           />
         </Form.Group>
 
+        <Row className="d-flex py-2">
+          <Col className="d-flex">
+            <Form.Group
+              onChange={(e) => setStart(e.target.value)}
+              controlId="startDate"
+            >
+              <Form.Label className="m-0">Start Date</Form.Label>
+              <Form.Control type="datetime-local" />
+            </Form.Group>
+          </Col>
+          <Col className="d-flex">
+            <Form.Group
+              onChange={(e) => setEnd(e.target.value)}
+              controlId="endDate"
+            >
+              <Form.Label className="m-0">End Date</Form.Label>
+              <Form.Control type="datetime-local" />
+            </Form.Group>
+          </Col>
+        </Row>
+
         <Form.Group
-        className="h-25"
+          className="h-25 py-2"
           onChange={(e) => setDesc(e.target.value)}
           controlId="description"
         >
-          <Form.Label>Description</Form.Label>
-          <Form.Control type="text" placeholder="Enter Description" />
+          <Form.Label className="m-0">Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            type="text"
+            placeholder="Enter Description"
+          />
         </Form.Group>
 
-        <Button className="m-1 rounded-0" variant="primary" type="submit">
+        <Button className="my-2 rounded-0" variant="primary" type="submit">
           Submit
         </Button>
-        <Button className="rounded-0" onClick={() => setShow(false)}>
+        <Button className=" mx-2 rounded-0" onClick={() => setShow(false)}>
           Cancel
         </Button>
       </Form>
-    </div>
+    </>
   );
 };
 

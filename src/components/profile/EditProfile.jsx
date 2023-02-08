@@ -8,9 +8,9 @@ import CloseButton from 'react-bootstrap/CloseButton';
 const EditProfile = ({ user, show,setShow }) => {
   return ReactDom.createPortal(
     <Modal show={show}>
-      <Modal.Header> <CloseButton onClick={()=> setShow(!show)}/></Modal.Header>
-      <Card className="d-flex border-0">
-        <h1 className="border-bottom">Edit Profile</h1>
+      <Card className="d-flex border-0 p-3">
+      <Modal.Header className="border-0"> <CloseButton onClick={()=> setShow(!show)}/></Modal.Header>
+        <h1>Edit Profile</h1>
         <Form onSubmit={()=> setShow(!show)}>
           <Row>
             <Form.Group className="m-0">
@@ -38,10 +38,11 @@ const EditProfile = ({ user, show,setShow }) => {
             <Form.Control type="text" defaultValue={user.email} />
           </Form.Group>
         </Form>
-        <Col className="justify-content-end">
-          <Button className="rounded-0 m-1" type="submit">
+        <Col className="justify-content-end my-3">
+          <Button className="rounded-0 m-0" type="submit">
             Save Changes
           </Button>
+          <Button onClick={()=> setShow(false)} className="rounded-0 mx-2">Cancel</Button>
         </Col>
       </Card>
     </Modal>,

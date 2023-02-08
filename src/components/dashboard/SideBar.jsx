@@ -13,10 +13,13 @@ const SideBar = ({
 }) => {
   return (
     <>
-      <Container fluid className="h-100 m-0">
-        <Row className="border">
+      <Container Fluid className="h-100 m-0 border p-3 shadow">
+        <Row className="border-0">
           <Profile />
         </Row>
+        <br></br>
+        <br></br>
+
         <Row>
           <Col className="m-2">
             <BsFilter /> Filter

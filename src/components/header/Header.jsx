@@ -33,14 +33,6 @@ const Header = (props) => {
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Nav.Link href='/Dashboard'>DashBoard</Nav.Link>
                 <Nav.Link href='/Messages'>Messages</Nav.Link>
-                <Offcanvas placement="end" show={show} onHide={handleClose} {...props}>
-                    <Offcanvas.Header>
-                      <CloseButton onClick={handleClose}/>
-                    </Offcanvas.Header>
-                    <Offcanvas.Body>
-                      <Profile/>
-                    </Offcanvas.Body>
-                </Offcanvas>
               </Nav>
                 <Button className="rounded-0" onClick={()=>authCtx.logout()}>Logout</Button>
           </>

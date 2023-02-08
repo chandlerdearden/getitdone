@@ -9,8 +9,8 @@ import axios from "axios";
 import AddTaskModal from "./AddTaskModal";
 import SideBar from "./SideBar";
 import "./dashboard.css"
-import { Container,Row,Col } from "react-bootstrap";
-import { BsCheckLg } from "react-icons/bs";
+import { Container,Row,Col, Offcanvas, Button } from "react-bootstrap";
+import { BsJustify } from "react-icons/bs";
 
 const localizer = momentLocalizer(moment);
 
@@ -23,6 +23,10 @@ const Dashboard = () => {
   const [selectedTask, setSelectedTask] = useState({});
   const [byTasks, setByTasks] = useState(false)
   const [byProjects, setByProjects] = useState(false)
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   
   useEffect(() => {
 
@@ -75,7 +79,7 @@ const Dashboard = () => {
     <>
     <Container fluid className="d-flex m-0 w-100 justify-content-center">
       <Row className="m-0 d-flex w-100">
-      <Col md={2}>
+      <Col xl={3} xxl={3} className='d-none d-xl-block'>
       <SideBar
       byTasks = {byTasks}
       byProjects = {byProjects} 
@@ -83,7 +87,23 @@ const Dashboard = () => {
       filterByProjects={setByProjects} 
       addTaskModal={handleAddTaskModal}/>
       </Col>
-      <Col md={10} id="calendar">
+      <Col className="d-xl-none ">
+      <Button style={{backgroundColor: 'transparent'}} variant="primary" className="d-xl-none rounded-0 my-2" onClick={handleShow}>
+        <BsJustify style={{color: 'blue'}}/>
+      </Button>
+        <Offcanvas  show={show} onHide={handleClose} responsive="xl" >
+          <Offcanvas.Header closeButton></Offcanvas.Header>
+          <Offcanvas.Body>
+          <SideBar
+      byTasks = {byTasks}
+      byProjects = {byProjects} 
+      filterByTasks={setByTasks} 
+      filterByProjects={setByProjects} 
+      addTaskModal={handleAddTaskModal}/>
+          </Offcanvas.Body>
+        </Offcanvas>
+      </Col>
+      <Col xl={9} xxl={9} id="calendar"  className=" m-0 p-3 border shadow">
         <Calendar
           selectable
           onSelectEvent={(task) => eventModalHandler(task)}

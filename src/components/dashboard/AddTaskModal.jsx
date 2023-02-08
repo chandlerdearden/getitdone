@@ -25,17 +25,14 @@ const getUsernames = async () => {
   }, []
   )
   return ReactDom.createPortal(
-    <div id="modal_wrapper">
-    <Modal id="modal_container" show={show}>
-      <Modal.Header><CloseButton onClick={() => setShow(false)}/></Modal.Header>
-      <Modal.Body>
+    <Modal className=" modal-lg"  show={show}>
+      <Modal.Header className="border-0"><CloseButton onClick={() => setShow(false)}/></Modal.Header>
+      <Modal.Body className="p-1">
         <AddTaskForm usernames={usernames} setShow={setShow}/>  
       </Modal.Body>
-      <Modal.Footer>
-        {/* <Button onClick={() => setShow(false)}>Cancel</Button> */}
-      </Modal.Footer>
+      
     </Modal>
-    </div>,
+    ,
     document.getElementById("addtask-modal")
   )
 }

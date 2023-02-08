@@ -73,16 +73,18 @@ const Messages = () => {
       const string = `"#link${message.message_id}"`;
       return (
         <Tab.Pane key={message.message_id} className="h-100" eventKey={string}>
-          <Row className="h-75 m-5 shadow border">
-          <Col className="m-3">
+          <Row className=" m-5 h-75 shadow border d-flex">
+          <Col  className="m-0">
           <h3 className="border-bottom">From: {message.user.username}</h3>
           <h4>{message.subject}</h4>
           <p className="h-75 m-3 p-3">{message.content}</p>
           </Col>
           </Row>
-          <Row className="m-0 p-0 w-100 d-flex justify-content-end">
-          <Col md={2} className='d-flex'><Button>Reply</Button></Col>
-          <Col md={2} className='d-flex'><Button onClick={()=> deleteHandler(message.message_id)}>Delete</Button></Col>
+          <Row>
+          <Col className=" mx-5 d-flex justify-content-end" >
+          <Button className="mx-2 rounded-0">Reply</Button>
+          <Button className="rounded-0" onClick={()=> deleteHandler(message.message_id)}>Delete</Button>
+          </Col>
           </Row>
         </Tab.Pane>
       );

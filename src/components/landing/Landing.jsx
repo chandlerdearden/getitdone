@@ -18,7 +18,7 @@ const Landing = () => {
   return (
   <>
   <Header/>
-    <Container fluid className="">
+    <Container>
       <Row className="vh-100 d-flex justify-content-center">
         <Col md={8} lg={6} xs={12} className="m-4">
           <div className="border border-3 border-primary"></div>
