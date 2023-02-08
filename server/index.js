@@ -11,6 +11,7 @@ const { Messages } = require('./models/messages')
 const express = require("express");
 const cors = require("cors");
 
+const path = require('path')
 const { SERVER_PORT } = process.env;
 
 const app = express();
@@ -58,6 +59,12 @@ app.post('/messages', newMessage)
 app.put('/readMessage', readMessage)
 app.get('/messages/:userId', getMessages)
 app.delete('/messages/:id', deleteMessage)
+
+
+app.use(express.static(__dirname + '/../build'))
+app.get('*', (req,res)=> {
+  res.sendFile(path.join(__dirname, "../build.index.html"))
+})
 
 
 sequelize
