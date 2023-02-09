@@ -34,8 +34,11 @@ const AddmessageForm = ({ getMessages, usernames, show, setShow }) => {
       };
       axios
         .post("/messages", message)
-        .then((res) => console.log("Message was added"));
-      getMessages();
+        .then((res) =>{
+          console.log("Message was added")
+          getMessages();
+        } 
+        );
     });
   };
   return ReactDom.createPortal(
@@ -74,7 +77,7 @@ const AddmessageForm = ({ getMessages, usernames, show, setShow }) => {
           <Form.Control as='textarea' type="text" placeholder="Enter Description" />
         </Form.Group>
 
-        <Button className="rounded-0 my-1" variant="primary" type="submit">
+        <Button onClick={()=> setShow(false)} className="rounded-0 my-1" variant="primary" type="submit">
           Submit
         </Button>
       </Form>
